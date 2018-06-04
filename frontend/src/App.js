@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Posts from './Components/Posts'
+import Categories from './Components/Categories'
+import Comments from './Components/Comment.js'
+import Modal from 'react-modal'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>Readable</h1>
+        <h2>Category</h2>
+        <Posts></Posts>
+        <Categories></Categories>
+        <Comments></Comments>
+        <Modal className='add-comment-modal'></Modal>
+        <Modal className='add-post-modal'></Modal>
       </div>
     );
   }
