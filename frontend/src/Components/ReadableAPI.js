@@ -15,7 +15,12 @@ export const getCategories = () => {
     fetch(`${api}/categories`, { headers })
     .then(returnedPromise => returnedPromise.json())
     .then(jsonData => jsonData.categories.map(category => category.name))
-    .then(returnedCategories => this.setState(state => state.categories = returnedCategories)) 
+}
+
+export const getPosts = () => {
+    fetch(`${api}/posts`, { headers })
+    .then(returnedPromise => returnedPromise.json())
+    .then(jsonData => jsonData)
 }
 
 

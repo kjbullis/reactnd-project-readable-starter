@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
-import './App.css';
-import Posts from './Components/Posts'
-import Categories from './Components/Categories'
-import Comments from './Components/Comment.js'
-import Modal from 'react-modal'
+import React, { Component } from 'react'
+import './App.css'
+import Home from './Components/Home'
+import CategoryView from './Components/CategoryView'
+import PostDetail from './Components/PostDetail'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>Readable</h1>
-        <h2>Category</h2>
-        <Posts></Posts>
-        <Categories></Categories>
-        <Comments></Comments>
-        <Modal className='add-comment-modal'></Modal>
-        <Modal className='add-post-modal'></Modal>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <h1>Readable</h1>
+                <Home></Home>
+                <CategoryView></CategoryView>
+                <PostDetail></PostDetail>
+            </div>
+        );
+    }
 }
 
 export default App;

@@ -19,10 +19,8 @@ class Categories extends Component {
         fetch(`${api}/categories`, { headers })
         .then(returnedPromise => returnedPromise.json())
         .then(jsonData => jsonData.categories.map(category => category.name))
-        .then(returnedCategories => this.setState(state => {
-            state.categories = returnedCategories
-            console.log('Categories state', this.state.categories)
-        })) 
+        .then(returnedCategories => this.setState(state => 
+            state.categories = returnedCategories)) 
     }
 
     componentDidMount() {
@@ -32,13 +30,14 @@ class Categories extends Component {
     render() { 
         // const categories = this.state.categories 
         return ( 
-            <div>
+            <aside>
+                <h3>Categories</h3>
                 <ul className='category-list'>
                     {this.state.categories.map((category) => (
                         <li key={category}>{category}</li>
                     ))}
                 </ul>
-            </div>  
+            </aside>  
         )
     }
 }
