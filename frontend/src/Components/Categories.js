@@ -19,25 +19,28 @@ class Categories extends Component {
         fetch(`${api}/categories`, { headers })
         .then(returnedPromise => returnedPromise.json())
         .then(jsonData => jsonData.categories.map(category => category.name))
-        .then(returnedCategories => this.setState(state => state.categories = returnedCategories)) 
+        .then(returnedCategories => this.setState(state => {
+            state.categories = returnedCategories
+            console.log('Categories state', this.state.categories)
+        })) 
     }
 
     componentDidMount() {
         this.getCategories()
     }  
 
-    render() {  
-        console.log('categories', this.state.categories)
-    return (
-      <div>
-        <ul className='category-list'>
-            {this.state.categories.map((category) => (
-                <li key={category}>{category}</li>
-            ))}
-        </ul>
-      </div>  
-    )
-  }
+    render() { 
+        // const categories = this.state.categories 
+        return ( 
+            <div>
+                <ul className='category-list'>
+                    {this.state.categories.map((category) => (
+                        <li key={category}>{category}</li>
+                    ))}
+                </ul>
+            </div>  
+        )
+    }
 }
 
 export default Categories
