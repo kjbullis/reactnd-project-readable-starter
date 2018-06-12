@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import Comments from './Comments'
+import Comments from './Comments'
 
 const id = '8xf0y6ziyjabvozdd253nd'
 const api = "http://localhost:3001"
@@ -38,9 +38,9 @@ export default class PostDetail extends Component {
     }
 
     render() {
-        return (
-        <div>
-            <h3>{this.state.post.title}</h3>
+        return ( 
+        <div className='single-post-container'>
+            <h3 className={`category-${this.state.post.category}`}>{this.state.post.title}</h3>
             <h4>by {this.state.post.author}</h4>
             <h5><time>{new Intl.DateTimeFormat('en-US', { 
                 year: 'numeric', 
@@ -51,7 +51,8 @@ export default class PostDetail extends Component {
             <p>Vote Score: {this.state.post.voteScore}</p>
             <p>Comment Count: {this.state.post.commentCount}</p> 
             <button value={this.voteUp(this.state.post.id)}>Vote Up</button>
-            <button onClick={this.voteDown(this.state.post.id)}>Vote Down</button>   
+            <button onClick={this.voteDown(this.state.post.id)}>Vote Down</button>  
+            <Comments postId={this.state.post.id} ></Comments> 
         </div>
         )
   }

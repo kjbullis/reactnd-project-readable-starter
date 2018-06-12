@@ -1,4 +1,72 @@
+html {
+    background-color: #404040;
+}
+
+* { 
+    box-sizing: border-box;
+    color: white;
+    position: relative;
+}
+
+button {
+    color: black;
+    padding: 2.5%;
+    border: none;
+    border-radius: 3px;
+    margin: 10px;
+    box-shadow: 1px 1px 4px black;
+}
+
 ul {
     list-style: none;
 }
+
+.modal {
+    width: 80vw;
+    padding: 0 20px;
+}
+
+.modal label {
+    vertical-align: top;
+}
+
+form input, form textarea, form select {
+    border: none;
+    color: black;
+    padding: 2.5%;
+    margin-bottom: 40px;
+    box-shadow: 0px 0px 4px 2px black inset;
+    border-radius: 3px;
+}
+
+.category-list, .post, .single-post-container {
+    margin: 5vw;
+    box-shadow: 1px 1px 4px black;
+    border-radius: 3px;
+}
+
+ul.category-list, .post-list {
+    padding-left: 0;
+}
+
+.category-list li, .post, .single-post-container {
+    padding: 5%;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.category-react {
+    color: #00C700;
+}
+
+.category-redux {
+    color: #A3A3FF
+}
+
+.category-udacity {
+    color: #FF8A8A;
+}
+
 

@@ -167,6 +167,16 @@
 		"rFN": 0,
 		"uCM": 0
 		},
+	"\/frontend\/src\/Actions\/index.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/frontend\/src\/Actions\/index-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
 	"\/frontend\/src\/App.css": {
 		"aP": 1,
 		"bl": 0,
@@ -197,16 +207,6 @@
 		"sC": 3,
 		"tS": 0
 		},
-	"\/frontend\/src\/Components\/Body.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/frontend\/src\/Components\/Body-min.js",
-		"oF": 0,
-		"sC": 3,
-		"tS": 0
-		},
 	"\/frontend\/src\/Components\/Categories.js": {
 		"ft": 64,
 		"ma": 0,
@@ -217,11 +217,21 @@
 		"sC": 3,
 		"tS": 0
 		},
-	"\/frontend\/src\/Components\/Comment.js": {
+	"\/frontend\/src\/Components\/CategoryView.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 1,
+		"oAP": "\/frontend\/src\/Components\/CategoryView-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/frontend\/src\/Components\/Comment.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
 		"oAP": "\/frontend\/src\/Components\/Comment-min.js",
 		"oF": 0,
 		"sC": 3,
@@ -231,18 +241,48 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "\/frontend\/src\/Components\/Comments-min.js",
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
 		},
-	"\/frontend\/src\/Components\/Post.js": {
+	"\/frontend\/src\/Components\/EditPost.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/frontend\/src\/Components\/Post-min.js",
+		"oAP": "\/frontend\/src\/Components\/EditPost-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/frontend\/src\/Components\/Home.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/frontend\/src\/Components\/Home-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/frontend\/src\/Components\/ModalNot.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/frontend\/src\/Components\/ModalNot-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/frontend\/src\/Components\/PostDetail.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/frontend\/src\/Components\/PostDetail-min.js",
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
@@ -263,16 +303,6 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/frontend\/src\/Components\/ReadableAPI-min.js",
-		"oF": 0,
-		"sC": 3,
-		"tS": 0
-		},
-	"\/frontend\/src\/Components\/Vote.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/frontend\/src\/Components\/Vote-min.js",
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
@@ -326,6 +356,13 @@
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
+		},
+	"\/frontend\/yarn-error.log": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/frontend\/yarn-error.log",
+		"oF": 0
 		},
 	"\/frontend\/yarn.lock": {
 		"cB": 0,

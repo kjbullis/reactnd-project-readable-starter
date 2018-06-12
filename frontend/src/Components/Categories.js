@@ -31,10 +31,9 @@ class Categories extends Component {
         // const categories = this.state.categories 
         return ( 
             <aside>
-                <h3>Categories</h3>
                 <ul className='category-list'>
                     {this.state.categories.map((category) => (
-                        <li key={category}>{category}</li>
+                        <li key={category}><h2 className={`category-${category}`}>{category}</h2></li>
                     ))}
                 </ul>
             </aside>  

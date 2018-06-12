@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import DateFormat from 'dateformat'
 
 const api = "http://localhost:3001"
 let token = localStorage.token
@@ -55,10 +54,10 @@ export default class Posts extends Component {
     return (
       <div>
         <h3>Posts</h3>
-        <ul>
+        <ul className='post-list'>
           {this.state.posts.map((post) => (
-            <li key={post.id}>
-                <h4>{post.title}</h4>
+            <li className='post' key={post.id}>
+                <h4 className={`category-${post.category}`}>{post.title}</h4>
                 <h5>by {post.author}</h5>
                 <h6><time>{new Intl.DateTimeFormat('en-US', { 
                     year: 'numeric', 

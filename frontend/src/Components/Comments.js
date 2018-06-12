@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 const api = "http://localhost:3001"
+const id = '8xf0y6ziyjabvozdd253nd'
 let token = localStorage.token
 if (!token)
 token = localStorage.token = Math.random().toString(36).substr(-8)
@@ -10,49 +11,41 @@ const headers = {
 'Authorization': token
 }
 
-export default class Posts extends Component {
+console.log('Props', this.props)
+
+export default class Comments extends Component {
   state = {
-    posts: [
-      {
-        id: 1,
-        title: 'Hi'
-      },
-      {
-       id: 2,
-       title: 'there'
-      }, 
-      {
-        id: 3,
-        title: ' ,dude'
-      }
-    ]
+    comments: [{id: 1, timesstamp: 1, body: 'hi', author: 'me'}]
   }
 
   getComments = () => {
-      fetch(`${api}/comments`, { headers })
+      fetch(`${api}/posts/${id}/comments`, { headers })
       .then(returnedPromise => returnedPromise.json())
-      .then(jsonData => jsonData)
-      .then(returnedPosts => this.setState(state => state.posts = returnedPosts)) 
+      .then(returnedComments => this.setState(state => state.comments = returnedComments))
   }
 
   componentDidMount() {
-      this.getPosts()
+      this.getComments()
+      console.log(this.state.comments)
   }  
 
   render() {
 
     return (
       <div>
-        <h3>Posts</h3>
+        <h4>Comments</h4>
         <ul>
-          {this.state.posts.map((post) => (
-            <li key={post.id}>
-                <h4>{post.title}</h4>
-                <h5>by {post.author}</h5>
-                <div>{post.body}</div>
-                <p>{post.category}</p>
+            {this.state.comments.map((comment) => (
+            <li key={comment.id}>
+                <h5><time>{new Intl.DateTimeFormat('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: '2-digit' 
+                }).format(comment.timestamp)}</time></h5>
+                <div>{comment.body}</div>
+                <h5>by {comment.author}</h5>
             </li>
-          ))}
+        ))}
         </ul>
       </div>
     )
