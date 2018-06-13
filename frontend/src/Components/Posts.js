@@ -12,20 +12,7 @@ const headers = {
 
 export default class Posts extends Component {
   state = {
-    posts: [
-      {
-        id: 1,
-        title: 'Hi'
-      },
-      {
-       id: 2,
-       title: 'there'
-      }, 
-      {
-        id: 3,
-        title: ' ,dude'
-      }
-    ]
+    posts: [{id: 1}]
   }
 
   getPosts = () => {
@@ -36,7 +23,7 @@ export default class Posts extends Component {
   }
 
     componentDidMount() {
-        this.getPosts()
+        this.getPosts();
     } 
   
     voteUp(id) {

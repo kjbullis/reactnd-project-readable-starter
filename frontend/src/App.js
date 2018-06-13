@@ -13,6 +13,7 @@ token = localStorage.token = Math.random().toString(36).substr(-8)
 
 const headers = {
 'Accept': 'application/json',
+'Content-Type': 'application/json',
 'Authorization': token
 }
 
@@ -33,6 +34,11 @@ class App extends Component {
 
     componentWillMount() {
         Modal.setAppElement('#root')
+        // this.addPost()
+        // this.editPost()
+        // this.voteUp()
+        // this.voteDown()
+        this.deletePost()
     }
     componentDidMount() {
         this.getCategories()
@@ -45,15 +51,127 @@ class App extends Component {
     }
 
     addPost = () => {
-        this.closeAddPostModal()
-        //Get timestamp
+        // this.closeAddPostModal()
+        const id = Math.random().toString(36).substr(-8)
         const timeStamp = Date.now()
-        //
-        const voteScore = 0;
-        const deleted = false;        
+        const title = "Title by Kevin"
+        const body = "Body text"
+        const author = "Kevin"
+        const category = "react"
+
+        //Hard coded fetch
+        const formObject = {
+                id,
+                timeStamp,
+                title,
+                body,
+                author,
+                category
+        }
+
+        //the following successfully creates a JSON object
+        const form = JSON.stringify(formObject)
+        console.log('JSONned form data', form)
+        //form looks like this
+        // {
+        //     "id":"bt91jrai",
+        //     "timestamp":1528922356721,
+        //     "title":"Title by Kevin",
+        //     "body":"Body text",
+        //     "author":"Kevin",
+        //     "category":"react"
+        // }
+    
+        fetch(`${api}/posts`, {
+            method: 'post',
+            headers,
+            body: form
+          })
+          .then(returnedPromise => returnedPromise.json())
+          .then(jsonData => jsonData)
+          .then(returnedPosts => console.log("Data returned from addPost:", returnedPosts)) 
     }
 
+    editPost = () => {
+        const id = "223gtqhq"
+        const title = 'New title by Kevin'
+        const body = "How do you like them apples?"
+        const formObject = {
+            title,
+            body
+        }
 
+        //the following successfully creates a JSON object
+        const form = JSON.stringify(formObject)
+        console.log('JSONned edit-form data', form)
+
+        
+        fetch(`${api}/posts/${id}`, {
+            method: 'put',
+            headers,
+            body: form
+          })
+          .then(returnedPromise => returnedPromise.json())
+          .then(jsonData => jsonData)
+          .then(returnedPosts => console.log("Data returned from editPost:", returnedPosts)) 
+    }
+
+    voteUp = () => {
+        const id = "223gtqhq"
+        const option = 'upVote'
+        const formObject = {
+            option
+        }
+
+        //the following successfully creates a JSON object
+        const form = JSON.stringify(formObject)
+        console.log('JSONned edit-form data', form)
+
+        
+        fetch(`${api}/posts/${id}`, {
+            method: 'post',
+            headers,
+            body: form
+          })
+          .then(returnedPromise => returnedPromise.json())
+          .then(jsonData => jsonData)
+          .then(returnedPosts => console.log("Data returned from voteUp:", returnedPosts)) 
+    }
+
+    voteDown = () => {
+        const id = "9dipb9fv"
+        const option = 'downVote'
+        const formObject = {
+            option
+        }
+
+        //the following successfully creates a JSON object
+        const form = JSON.stringify(formObject)
+        console.log('JSONned edit-form data', form)
+
+        
+        fetch(`${api}/posts/${id}`, {
+            method: 'post',
+            headers,
+            body: form
+          })
+          .then(returnedPromise => returnedPromise.json())
+          .then(jsonData => jsonData)
+          .then(returnedPosts => console.log("Data returned from vote:", returnedPosts)) 
+    }
+
+    deletePost = () => {
+        const id = "280ke2jj"
+        
+        fetch(`${api}/posts/${id}`, {
+            method: 'delete',
+            headers
+          })
+          .then(returnedPromise => returnedPromise.json())
+          .then(jsonData => jsonData)
+          .then(returnedPosts => console.log("Data returned from editPost:", returnedPosts)) 
+    }
+    
 
 
     render() {
@@ -69,7 +187,6 @@ class App extends Component {
                 >
                     <div>
                         <form>
-                            
                             <label htmlFor='title'>Post Title</label>
                             <input type='text' id='title' name='title'/><br/>
                             <label htmlFor='body'>Post Body</label>
@@ -86,8 +203,8 @@ class App extends Component {
                             <button 
                                 className='icon-button'
                                 type="submit"
-                                onClick={this.addPost}>
-                            Add Post</button>
+                                onClick={this.addPost}
+                            >Add Post</button>
                         </form>
                     </div>
                 </Modal>
