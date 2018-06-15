@@ -1,40 +1,41 @@
-export const SEE_POST_DETAILS = 'SEE_POST_DETAILS'
-export const SAVE_POST = 'SAVE_POST'
-export const SAVE_COMMENT = 'SAVE_COMMENT'
-export const DELETE_POST = 'DELETE_POST'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const ADD_POSTS = 'ADD_POSTS'
+export const ADD_POST = 'ADD_POST'
 export const EDIT_POST = 'EDIT_POST'
+export const DELETE_POST = 'DELETE_POST'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const SEE_POST_DETAILS = 'SEE_POST_DETAILS'
 
 
-export const seePostDetails = ({ id }) => ({
-    type: SEE_POST_DETAILS,
-    id,
+export const addPosts = ({ posts }) => ({
+    type: ADD_POSTS,
+    posts
 })
 
-export const savePost = ({ post }) => ({
-    type: SAVE_POST,
+export const addPost = ({ post }) => ({
+    type: ADD_POST,
     post,
 }) 
 
-export const saveComment = ({ comment }) => ({
-    type: SAVE_COMMENT,
-    comment,
-}) 
+export const editPost = ({ post }) => ({
+    type: EDIT_POST,
+    post,
+})
 
 export const deletePost = ({ postID }) => ({
     type: DELETE_POST,
     postID,
 })
 
+export const addComment = ({ comment }) => ({
+    type: ADD_COMMENT,
+    comment,
+}) 
+
 export const deleteComment = ({ commentID }) => ({
     type: DELETE_COMMENT,
     commentID,
-})
-
-export const editPost = ({ post }) => ({
-    type: EDIT_POST,
-    post,
 })
 
 export const editComment = ({ comment }) => ({
@@ -42,19 +43,23 @@ export const editComment = ({ comment }) => ({
     comment,
 })
 
+export const seePostDetails = ({ id }) => ({
+    type: SEE_POST_DETAILS,
+    id,
+})
 
 
 
-//make local, move to view component
+// //make local, move to view component
 
-const voteUp 
+// const voteUp 
 
-const voteDown 
+// const voteDown 
 
-const addOrEditPost 
+// const addOrEditPost 
 
-const addOrEditComment
+// const addOrEditComment
 
-const viewByTimeStamp
+// const viewByTimeStamp
 
-const viewByVoteScore
+// const viewByVoteScore

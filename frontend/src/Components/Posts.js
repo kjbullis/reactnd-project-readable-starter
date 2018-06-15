@@ -56,6 +56,7 @@ export default class Posts extends Component {
                 <p>Comment Count: {post.commentCount}</p>
                 <button value={this.voteUp(post.id)}>Vote Up</button>
                 <button onClick={this.voteDown(post.id)}>Vote Down</button>
+                {/*<button onClick={this.openPostModal(post)}>Edit</button> How do I get access to openPostModal? Make it part of the store.*/}
             </li>
           ))}
         </ul>

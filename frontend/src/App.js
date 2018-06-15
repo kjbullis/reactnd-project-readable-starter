@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import './App.css'
 import Home from './Components/Home'
 import CategoryView from './Components/CategoryView'
@@ -20,8 +21,11 @@ const headers = {
 
 class App extends Component {
     state = {
-        newPostModalOpen: true,
-        categories: ['kevin', 'tries', 'again']
+        postModalOpen: true,
+        commentModalOpen: true,
+        categories: [],
+        currentPost: null,
+        loadingFood: false,
     }
   
     getCategories = () => {
@@ -38,20 +42,47 @@ class App extends Component {
         // this.editPost()
         // this.voteUp()
         // this.voteDown()
-        this.deletePost()
+        // this.deletePost()
     }
     componentDidMount() {
         this.getCategories()
     }  
 
-    closeAddPostModal = () => {
-        this.setState(() => ({
-            newPostModalOpen: false
+    openPostModal = () => {
+        this.setState((currentPost) => ({
+            postModalOpen: true,
+            currentPost: currentPost
         }))    
     }
 
+    closePostModal = () => {
+        this.setState(() => ({
+            postModalOpen: false
+        }))    
+    }
+
+    openCommentModal = () => {
+        this.setState(() => ({
+            commentModalOpen: true
+        }))    
+    }
+
+    closeCommentModal = () => {
+        this.setState(() => ({
+            commentModalOpen: false
+        }))    
+    }
+
+
+    setEdit = () => {
+        this.setState(() => ({
+            modalOption: 'edit'
+        }))    
+    }
+
+
     addPost = () => {
-        // this.closeAddPostModal()
+        // this.closePostModal()
         const id = Math.random().toString(36).substr(-8)
         const timeStamp = Date.now()
         const title = "Title by Kevin"
@@ -175,14 +206,18 @@ class App extends Component {
 
 
     render() {
+        const { foodModalOpen, loadingFood, food, ingredientsModalOpen,  } = this.state
+        const { calendar, remove, selectRecipe } = this.props
+
         return (
             <div className="App">
                 <h1>Readable</h1>
+                <button>+</button>
                 <Modal
                     className='modal'
                     overlayClassName='overlay'
-                    isOpen={this.state.newPostModalOpen}
-                    onRequestClose={this.closeAddPostModal}
+                    isOpen={this.state.postModalOpen}
+                    onRequestClose={this.closePostModal}
                     contentLabel='Modal'                    
                 >
                     <div>
@@ -205,6 +240,30 @@ class App extends Component {
                                 type="submit"
                                 onClick={this.addPost}
                             >Add Post</button>
+                        </form>
+                    </div>
+                </Modal>
+                <Modal
+                    className='modal'
+                    overlayClassName='overlay'
+                    isOpen={this.state.commentModalOpen}
+                    onRequestClose={this.closeCommentModal}
+                    contentLabel='Modal'                    
+                >
+                    <div>
+                        <form>
+                            <label htmlFor='author'>Your name</label>
+                            <input type='text' id='author' name='author'/><br/>
+                            <label htmlFor='body'>Comment</label>
+                            <textarea id='body' name='body'/><br/>
+                           
+                            
+                            <input name="id" type="hidden" value={Math.random().toString(36).substr(-8)}/>
+                            <button 
+                                className='icon-button'
+                                type="submit"
+                                onClick={this.addComment}
+                            >{}</button>
                         </form>
                     </div>
                 </Modal>
