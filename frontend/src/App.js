@@ -21,32 +21,49 @@ const headers = {
 
 class App extends Component {
     state = {
+        //Should posts and comments be here? Or just added to the store and retrieved via props?
+        posts: {},
+        comments: {},
+        categories: [],
         postModalOpen: true,
         commentModalOpen: true,
-        categories: [],
         currentPost: null,
         loadingFood: false,
     }
-  
-    getCategories = () => {
+    
+    componentWillMount() {
+        Modal.setAppElement('#root')
+    }
+    
+    componentDidMount() {
+        this.fetchPosts()
+        this.fetchCategories()
+    }  
+
+    fetchPosts = () => {
+        fetch(`${api}/posts`, { headers })
+        .then(returnedPromise => returnedPromise.json())
+        .then(jsonData => jsonData)
+        .then(returnedPosts => this.setState(state => state.posts = returnedPosts))
+        //.then(use a function passed as a prop to add to the Store?)
+    }
+
+    fetchCategories = () => {
         fetch(`${api}/categories`, { headers })
         .then(returnedPromise => returnedPromise.json())
         .then(jsonData => jsonData.categories.map(category => category.name))
         .then(returnedCategories => this.setState(state => 
-            state.categories = returnedCategories)) 
+            state.categories = returnedCategories))
+         //.then(use a function passed as a prop to add to the Store?)     
     }
 
-    componentWillMount() {
-        Modal.setAppElement('#root')
-        // this.addPost()
-        // this.editPost()
-        // this.voteUp()
-        // this.voteDown()
-        // this.deletePost()
+    //Get comments for a specific post.
+    fetchPostComments = (id) => {
+        fetch(`${api}/comments/${id}`, { headers })
+        .then(returnedPromise => returnedPromise.json())
+        .then(jsonData => jsonData)
+        .then(returnedComments => this.setState(state => state.comments = returnedComments)) 
     }
-    componentDidMount() {
-        this.getCategories()
-    }  
 
     openPostModal = () => {
         this.setState((currentPost) => ({
@@ -73,14 +90,7 @@ class App extends Component {
         }))    
     }
 
-    setEdit = () => {
-        this.setState(() => ({
-            modalOption: 'edit'
-        }))    
-    }
-
-
-    addPost = () => {
+    addPostToServer = () => {
         // this.closePostModal()
 
         //Hard coded post object. Replace with data from state, which is in turn from the form
@@ -99,7 +109,7 @@ class App extends Component {
                 author,
                 category
         }
-        //convert formObject to JSON
+        //convert postObject to JSON
         const post = JSON.stringify(postObject)
     
         fetch(`${api}/posts`, {
@@ -112,7 +122,10 @@ class App extends Component {
           .then(returnedPosts => console.log("Data returned from addPost:", returnedPosts)) 
     }
 
-    editPost = () => {
+    editPostonServer = () => {
+        // this.closeCommentModal()
+
+        //Hard coded post object. Replace with data from state, which is in turn from the form
         const id = "223gtqhq"
         const title = 'New title by Kevin'
         const body = "How do you like them apples?"
@@ -137,6 +150,7 @@ class App extends Component {
     }
 
     voteUp = () => {
+        //Hard coded. Get from post and button.
         const id = "223gtqhq"
         const option = 'upVote'
         const formObject = {
@@ -159,6 +173,7 @@ class App extends Component {
     }
 
     voteDown = () => {
+        //Hard coded. Get from post and button
         const id = "9dipb9fv"
         const option = 'downVote'
         const formObject = {
@@ -180,7 +195,8 @@ class App extends Component {
           .then(returnedPosts => console.log("Data returned from vote:", returnedPosts)) 
     }
 
-    deletePost = () => {
+    deletePostfromServer = () => {
+        //Hard coded. Get id from post.
         const id = "280ke2jj"
         
         fetch(`${api}/posts/${id}`, {

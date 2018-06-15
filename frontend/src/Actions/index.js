@@ -2,10 +2,12 @@ export const ADD_POSTS = 'ADD_POSTS'
 export const ADD_OR_EDIT_POST = 'ADD_OR_EDIT_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
-export const ADD_COMMENT = 'ADD_COMMENT'
+export const ADD_COMMENTS = 'ADD_COMMENTS'
+export const ADD_OR_EDIT_COMMENT = 'ADD_OR_EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const SEE_POST_DETAILS = 'SEE_POST_DETAILS'
+export const ADD_CATEGORIES = 'ADD_CATEGORIES'
 
 
 export const addPosts = ({ posts }) => ({
@@ -28,9 +30,9 @@ export const deletePost = ({ postID }) => ({
     postID,
 })
 
-export const addComment = ({ comment }) => ({
-    type: ADD_COMMENT,
-    comment,
+export const addOrEditComments = ({ posts }) => ({
+    type: ADD_OR_EDIT_COMMENT,
+    posts
 }) 
 
 export const deleteComment = ({ commentID }) => ({
@@ -48,7 +50,10 @@ export const seePostDetails = ({ id }) => ({
     id,
 })
 
-
+export const addCategories = ({ categories }) => ({
+    type: ADD_CATEGORIES,
+    categories
+})
 
 // //make local, move to view component
 

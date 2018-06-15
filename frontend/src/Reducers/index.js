@@ -2,10 +2,11 @@ import {
     ADD_POSTS,
     ADD_OR_EDIT_POST,
     DELETE_POST,
-    ADD_COMMENT,
+    ADD_COMMENTS,
+    ADD_OR_EDIT_COMMENT,
     DELETE_COMMENT,
-    EDIT_COMMENT,
-    SEE_POST_DETAILS
+    SEE_POST_DETAILS,
+    ADD_CATEGORIES
 } from '../Actions'
 import { combineReducers } from 'redux';
 
@@ -64,11 +65,45 @@ function posts (state = initialPostsState, action) {
 }
 
 function comments (state = {}, action) {
-   return state;
+    const { comments, comment, id} = action
+
+    switch (action.type) {
+        case ADD_COMMENTS:
+            return {
+                ...state,
+                ...comments
+            };
+        case ADD_OR_EDIT_COMMENT:
+            return {
+                ...state,
+                [comment.id]: {
+                    comment 
+                } 
+            };    
+        case DELETE_COMMENT:
+            return {
+                ...state,
+                [id]: {
+                    deleted: true
+                } 
+            };        
+        default:
+            return state;
+    }    
 }
 
 function categories (state = [], action) {
-   return state;
+    const { categories } = action
+
+    switch (action.type) {
+        case ADD_CATEGORIES:
+            return {
+                ...state,
+                categories
+            };
+        default:
+            return state;
+    }    
 }
 
 
