@@ -1,5 +1,5 @@
 export const ADD_POSTS = 'ADD_POSTS'
-export const ADD_POST = 'ADD_POST'
+export const ADD_OR_EDIT_POST = 'ADD_OR_EDIT_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const ADD_COMMENT = 'ADD_COMMENT'
@@ -13,8 +13,8 @@ export const addPosts = ({ posts }) => ({
     posts
 })
 
-export const addPost = ({ post }) => ({
-    type: ADD_POST,
+export const addOrEditPost = ({ post }) => ({
+    type: ADD_OR_EDIT_POST,
     post,
 }) 
 

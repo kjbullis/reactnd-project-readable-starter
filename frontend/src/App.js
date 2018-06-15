@@ -51,7 +51,7 @@ class App extends Component {
     openPostModal = () => {
         this.setState((currentPost) => ({
             postModalOpen: true,
-            currentPost: currentPost
+            currentPost
         }))    
     }
 
@@ -73,7 +73,6 @@ class App extends Component {
         }))    
     }
 
-
     setEdit = () => {
         this.setState(() => ({
             modalOption: 'edit'
@@ -83,15 +82,16 @@ class App extends Component {
 
     addPost = () => {
         // this.closePostModal()
+
+        //Hard coded post object. Replace with data from state, which is in turn from the form
         const id = Math.random().toString(36).substr(-8)
         const timeStamp = Date.now()
         const title = "Title by Kevin"
         const body = "Body text"
         const author = "Kevin"
         const category = "react"
-
-        //Hard coded fetch
-        const formObject = {
+        
+        const postObject = {
                 id,
                 timeStamp,
                 title,
@@ -99,24 +99,13 @@ class App extends Component {
                 author,
                 category
         }
-
-        //the following successfully creates a JSON object
-        const form = JSON.stringify(formObject)
-        console.log('JSONned form data', form)
-        //form looks like this
-        // {
-        //     "id":"bt91jrai",
-        //     "timestamp":1528922356721,
-        //     "title":"Title by Kevin",
-        //     "body":"Body text",
-        //     "author":"Kevin",
-        //     "category":"react"
-        // }
+        //convert formObject to JSON
+        const post = JSON.stringify(postObject)
     
         fetch(`${api}/posts`, {
             method: 'post',
             headers,
-            body: form
+            body: post
           })
           .then(returnedPromise => returnedPromise.json())
           .then(jsonData => jsonData)

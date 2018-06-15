@@ -1,12 +1,11 @@
 import {
     ADD_POSTS,
-    ADD_POST,
-    EDIT_POST,
+    ADD_OR_EDIT_POST,
     DELETE_POST,
     ADD_COMMENT,
     DELETE_COMMENT,
     EDIT_COMMENT,
-    SEE_POST_DETAILS,
+    SEE_POST_DETAILS
 } from '../Actions'
 import { combineReducers } from 'redux';
 
@@ -45,12 +44,7 @@ function posts (state = initialPostsState, action) {
                 ...state,
                 ...posts
             };
-        case ADD_POST: 
-            return {
-                ...state,
-                post
-            };
-        case EDIT_POST:
+        case ADD_OR_EDIT_POST:
             return {
                 ...state,
                 [post.id]: {
