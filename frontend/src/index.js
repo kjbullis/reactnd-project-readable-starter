@@ -7,8 +7,6 @@ import { createStore } from 'redux';
 import rootReducer from './Reducers';
 import { Provider } from "react-redux";
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
 
 const store = createStore(
     rootReducer,

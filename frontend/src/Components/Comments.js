@@ -11,8 +11,6 @@ const headers = {
 'Authorization': token
 }
 
-console.log('Props', this.props)
-
 export default class Comments extends Component {
   state = {
     comments: [{id: 1, timesstamp: 1, body: 'hi', author: 'me'}]
@@ -26,7 +24,6 @@ export default class Comments extends Component {
 
   componentDidMount() {
       this.getComments()
-      console.log(this.state.comments)
   }  
 
   render() {

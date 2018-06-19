@@ -5,6 +5,9 @@ import Home from './Components/Home'
 import CategoryView from './Components/CategoryView'
 import PostDetail from './Components/PostDetail'
 import Modal from 'react-modal'
+import {
+    addPosts, addCategories
+} from './Actions'
 
 
 const api = "http://localhost:3001"
@@ -21,9 +24,8 @@ const headers = {
 
 class App extends Component {
     state = {
-        //Should posts and comments be here? Or just added to the store and retrieved via props?
-        posts: {},
-        comments: {},
+        posts: [],
+        comments: [],
         categories: [],
         postModalOpen: true,
         commentModalOpen: true,
@@ -33,20 +35,14 @@ class App extends Component {
     
     componentWillMount() {
         Modal.setAppElement('#root')
+        this.fetchCategories()
     }
     
     componentDidMount() {
-        this.fetchPosts()
-        this.fetchCategories()
+        
     }  
 
-    fetchPosts = () => {
-        fetch(`${api}/posts`, { headers })
-        .then(returnedPromise => returnedPromise.json())
-        .then(jsonData => jsonData)
-        .then(returnedPosts => this.setState(state => state.posts = returnedPosts))
-        //.then(use a function passed as a prop to add to the Store?)
-    }
+
 
     fetchCategories = () => {
         fetch(`${api}/categories`, { headers })
@@ -211,7 +207,7 @@ class App extends Component {
 
 
     render() {
-        const { foodModalOpen, loadingFood, food, ingredientsModalOpen,  } = this.state
+        const {   } = this.state
         const { calendar, remove, selectRecipe } = this.props
 
         return (
@@ -223,7 +219,7 @@ class App extends Component {
                     overlayClassName='overlay'
                     isOpen={this.state.postModalOpen}
                     onRequestClose={this.closePostModal}
-                    contentLabel='Modal'                    
+                    contentLabel='Modal'           
                 >
                     <div>
                         <form>
@@ -281,4 +277,23 @@ class App extends Component {
     }
 }
 
-export default App;
+//Using destructuring to get posts, calendar, and categories from the Store state. 
+//Now the App component should have access to posts, comments, and categories. But, does Home? etc?
+function mapStateToProps ({ categories }, currentPost)  {
+    
+    return {
+        categories,
+        currentPost,
+    }
+}    
+
+// function mapDispatchToProps (dispatch) {
+//     return {
+//         displayPosts: (posts) => dispatch(addPosts(posts)),
+//         displayCategories: (categories) => dispatch(addCategories(categories))
+//     }
+// }
+  
+  
+  
+export default connect(mapStateToProps)(App)
