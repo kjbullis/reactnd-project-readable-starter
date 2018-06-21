@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './Reducers';
 import { Provider } from "react-redux";
+import { BrowserRouter } from 'react-router-dom';
 
 
 const store = createStore(
@@ -15,6 +16,8 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </Provider>, document.getElementById('root'));
 registerServiceWorker();

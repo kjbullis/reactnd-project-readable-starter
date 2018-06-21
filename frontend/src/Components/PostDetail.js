@@ -17,6 +17,9 @@ export default class PostDetail extends Component {
         post: []
     }
   
+    //RIGHT NOW, I'M USING THIS.STATE.POST  BUT I'M ALSO PASSING IN THIS.PROPS.POST  
+    //FOR NOW PROPS.POST IS EMPTY, I NEED TO FIGURE OUT HOW TO PASS IN THE POST OBJECT
+
     getPost = () => {
         fetch(`${api}/posts/${id}`, { headers })
         .then(returnedPromise => returnedPromise.json())
@@ -38,22 +41,27 @@ export default class PostDetail extends Component {
     }
 
     render() {
+        const post = this.state.post
         return ( 
-        <div className='single-post-container'>
-            <h3 className={`category-${this.state.post.category}`}>{this.state.post.title}</h3>
-            <h4>by {this.state.post.author}</h4>
-            <h5><time>{new Intl.DateTimeFormat('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: '2-digit' 
-            }).format(this.state.post.timestamp)}</time></h5>
-            <div>{this.state.post.body}</div>
-            <p>Vote Score: {this.state.post.voteScore}</p>
-            <p>Comment Count: {this.state.post.commentCount}</p> 
-            <button value={this.voteUp(this.state.post.id)}>Vote Up</button>
-            <button onClick={this.voteDown(this.state.post.id)}>Vote Down</button>  
-            <Comments postId={this.state.post.id} ></Comments> 
-        </div>
+            <div className='post'>
+                <section>
+                    <h3 className={`category-${post.category}`}>{post.title}</h3>
+                    <h4>by {post.author}</h4>
+                    <h5><time>{new Intl.DateTimeFormat('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: '2-digit' 
+                    }).format(post.timestamp)}</time></h5>
+                    <div>{post.body}</div>
+                    <p>Vote Score: {post.voteScore}</p>
+                    <Comments postId={post.id} ></Comments>
+                </section>
+                <aside className='voting'>
+                    <button className='vote' onClick={this.voteUp(post.id)}>^</button>
+                    <p className='vote-score'>{post.voteScore}</p>
+                    <button className='down-arrow vote' onClick={this.voteDown(post.id)}>^</button>
+                </aside>
+            </div>
         )
-  }
+    }
 }

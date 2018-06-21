@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 const api = "http://localhost:3001"
 let token = localStorage.token
@@ -28,12 +29,11 @@ class Categories extends Component {
     }  
 
     render() { 
-        // const categories = this.state.categories 
         return ( 
             <aside>
                 <ul className='category-list'>
                     {this.state.categories.map((category) => (
-                        <li key={category}><h2 className={`category-${category}`}>{category}</h2></li>
+                        <Link key={category} to={`${category}`} className='category-view-link'><li key={category}><h2 className={`category-${category}`}>{category}</h2></li></Link>
                     ))}
                 </ul>
             </aside>  

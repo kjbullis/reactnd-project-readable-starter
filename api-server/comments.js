@@ -8,7 +8,7 @@ const defaultData = {
     id: '894tuq4ut84ut8v4t8wun89g',
     parentId: "8xf0y6ziyjabvozdd253nd",
     timestamp: 1468166872634,
-    body: 'Hi there! I am a COMMENT.',
+    body: `When I was first asked to make a film about my nephew, Hubert Farnsworth, I thought "Why should I?" Then later, Leela made the film. But if I did make it, you can bet there would have been more topless women on motorcycles. Roll film! You guys aren't Santa! You're not even robots. How dare you lie in front of Jesus? It doesn't look so shiny to me. Tell her you just want to talk. It has nothing to do with mating. This opera's as lousy as it is brilliant! Your lyrics lack subtlety. You can't just have your characters announce how they feel. That makes me feel angry!`,
     author: 'thingtwo',
     voteScore: 6,
     deleted: false,

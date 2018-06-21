@@ -5,6 +5,7 @@ import Home from './Components/Home'
 import CategoryView from './Components/CategoryView'
 import PostDetail from './Components/PostDetail'
 import Modal from 'react-modal'
+import { Route, withRouter, Link } from 'react-router-dom'
 import {
     addPosts, addCategories
 } from './Actions'
@@ -27,10 +28,11 @@ class App extends Component {
         posts: [],
         comments: [],
         categories: [],
-        postModalOpen: true,
-        commentModalOpen: true,
-        currentPost: null,
+        postModalOpen: false,
+        commentModalOpen: false,
+        activePost: null,
         loadingFood: false,
+        activeCategory: 'react'
     }
     
     componentWillMount() {
@@ -62,9 +64,9 @@ class App extends Component {
     }
 
     openPostModal = () => {
-        this.setState((currentPost) => ({
+        this.setState((activePost) => ({
             postModalOpen: true,
-            currentPost
+            activePost
         }))    
     }
 
@@ -212,8 +214,8 @@ class App extends Component {
 
         return (
             <div className="App">
-                <h1>Readable</h1>
-                <button>+</button>
+                <Link to='/'><h1>Readable</h1></Link>
+                <button className='add-post-button' onClick={this.openPostModal}>+</button>
                 <Modal
                     className='modal'
                     overlayClassName='overlay'
@@ -222,11 +224,11 @@ class App extends Component {
                     contentLabel='Modal'           
                 >
                     <div>
-                        <form>
+                        <form className='postAddEdit'>
                             <label htmlFor='title'>Post Title</label>
                             <input type='text' id='title' name='title'/><br/>
                             <label htmlFor='body'>Post Body</label>
-                            <textarea id='body' name='body'/><br/>
+                            <textarea id='body' name='body' rows={10}/><br/>
                             <label htmlFor='author'>Your name</label>
                             <input type='text' id='author' name='author'/><br/>
                             <label htmlFor='category'>Category</label>
@@ -237,10 +239,17 @@ class App extends Component {
                             </select><br/>
                             <input name="id" type="hidden" value={Math.random().toString(36).substr(-8)}/>
                             <button 
-                                className='icon-button'
+                                className='post-button'
                                 type="submit"
                                 onClick={this.addPost}
-                            >Add Post</button>
+                            >Post
+                            </button>
+                            <button
+                                class='cancel-button'
+                                type='button'
+                                onClick={this.closePostModal}
+                            >Cancel
+                            </button>  
                         </form>
                     </div>
                 </Modal>
@@ -252,25 +261,39 @@ class App extends Component {
                     contentLabel='Modal'                    
                 >
                     <div>
-                        <form>
+                        <form className='commentAddEdit'>
                             <label htmlFor='author'>Your name</label>
                             <input type='text' id='author' name='author'/><br/>
                             <label htmlFor='body'>Comment</label>
-                            <textarea id='body' name='body'/><br/>
-                           
-                            
+                            <textarea id='body' name='body' rows={10}/><br/>
                             <input name="id" type="hidden" value={Math.random().toString(36).substr(-8)}/>
                             <button 
-                                className='icon-button'
+                                className='post-button'
                                 type="submit"
                                 onClick={this.addComment}
-                            >{}</button>
+                            >Post
+                            </button>
+                            <button
+                                class='cancel-button'
+                                type='button'
+                                onClick={this.closeCommentModal}
+                            >Cancel
+                            </button>    
+
                         </form>
                     </div>
                 </Modal>
-                <Home></Home>
-                <CategoryView></CategoryView>
-                <PostDetail></PostDetail>
+                <Route exact path='/' render={() => (
+                    <Home></Home>
+                )}/>
+                <Route exact path={`/${this.state.activeCategory}`} render={() => (
+                    <CategoryView activeCategory={this.state.activeCategory}></CategoryView>
+                )}/> 
+                <Route exact path='/single-post' render={() => (
+                    <PostDetail post={this.state.activePost}></PostDetail>
+                )}/>    
+                    
+                
 
             </div>
         );
@@ -279,11 +302,11 @@ class App extends Component {
 
 //Using destructuring to get posts, calendar, and categories from the Store state. 
 //Now the App component should have access to posts, comments, and categories. But, does Home? etc?
-function mapStateToProps ({ categories }, currentPost)  {
+function mapStateToProps ({ categories }, activePost)  {
     
     return {
         categories,
-        currentPost,
+        activePost,
     }
 }    
 
@@ -296,4 +319,4 @@ function mapStateToProps ({ categories }, currentPost)  {
   
   
   
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))

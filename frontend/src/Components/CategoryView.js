@@ -5,10 +5,10 @@ import Modal from 'react-modal'
 
 export default class CategoryView extends Component {
   render() {
+    console.log('Category View Props', this.props)
     return (
       <div>
-        <h3>Active Category{/*Active category will appear here*/}</h3>
-        <Categories></Categories>
+        <h2 className={`section-heading category-${this.props.activeCategory}`}>{this.props.activeCategory}</h2>
         <Posts></Posts>
         <Modal className='add-comment-modal'></Modal>
         <Modal className='add-post-modal'></Modal>

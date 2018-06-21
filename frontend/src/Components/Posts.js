@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { log } from 'util';
 import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 import { addPosts, addCategories } from '../Actions'
+
 
 const api = "http://localhost:3001"
 let token = localStorage.token
@@ -53,26 +54,31 @@ class Posts extends Component {
         const posts = this.props.posts
         return (
         <div>
-            <h3>Posts</h3>
+            <h2 className='section-heading'>posts</h2>
             <ul className='post-list'>
             {posts.map((post) => (
-                <li className='post' key={post.id}>
-                    <div onClick={this.showPostDetails(post)}>
-                        <h4 className={`category-${post.category}`}>{post.title}</h4>
-                        <h5>by {post.author}</h5>
-                        <h6><time>{new Intl.DateTimeFormat('en-US', { 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: '2-digit' 
-                        }).format(post.timestamp)}</time></h6>
-                        <div>{post.body}</div>
-                    </div>
-                    <p>Vote Score: {post.voteScore}</p>
-                    <p>Comment Count: {post.commentCount}</p>
-                    <button value={this.voteUp(post.id)}>Vote Up</button>
-                    <button onClick={this.voteDown(post.id)}>Vote Down</button>
-                    {/*<button onClick={this.openPostModal(post)}>Edit</button> How do I get access to openPostModal? Make it part of the store.*/}
-                </li>
+                <Link key={post.id} to='/single-post'>
+                    <li className='post' key={post.id}>
+                        <div onClick={this.showPostDetails(post)}>
+                            <h4 className={`category-${post.category}`}>{post.title}</h4>
+                            <h5>by {post.author}</h5>
+                            <h6><time>{new Intl.DateTimeFormat('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: '2-digit' 
+                            }).format(post.timestamp)}</time></h6>
+                            <div>{post.body}</div>
+                            <p>Comments: {post.commentCount}</p>
+                        </div>                    
+                        <aside className='voting'>
+                            <button className='vote' onClick={this.voteUp(post.id)}>^</button>
+                            <p className='vote-score'>{post.voteScore}</p>
+                            <button className='down-arrow vote' onClick={this.voteDown(post.id)}>^</button>
+                        </aside>
+                        
+                        {/*<button onClick={this.openPostModal(post)}>Edit</button> How do I get access to openPostModal? Make it part of the store.*/}
+                    </li>
+                </Link>
             ))}
             </ul>
         </div>
@@ -99,4 +105,4 @@ class Posts extends Component {
         }
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Posts))

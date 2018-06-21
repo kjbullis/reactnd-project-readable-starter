@@ -26,6 +26,17 @@ export default class Comments extends Component {
       this.getComments()
   }  
 
+  voteUp(id) {
+    //change the voteScore in state for current post
+     //change the voteScore on server for current post
+}
+
+    voteDown(id) {
+    //the voteScore in state for current post
+    //change the voteScore on server for current post
+    }
+
+
   render() {
 
     return (
@@ -33,14 +44,21 @@ export default class Comments extends Component {
         <h4>Comments</h4>
         <ul>
             {this.state.comments.map((comment) => (
-            <li key={comment.id}>
-                <h5><time>{new Intl.DateTimeFormat('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: '2-digit' 
-                }).format(comment.timestamp)}</time></h5>
-                <div>{comment.body}</div>
-                <h5>by {comment.author}</h5>
+            <li key={comment.id} className='comment'>
+                <aside className='voting'>
+                    <button className='vote' onClick={this.voteUp(comment.id)}>^</button>
+                    <p className='vote-score'>{comment.voteScore}</p>
+                    <button className='down-arrow vote' onClick={this.voteDown(comment.id)}>^</button>
+                </aside>
+                <section>
+                    <h5><time>{new Intl.DateTimeFormat('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: '2-digit' 
+                    }).format(comment.timestamp)}</time></h5>
+                    <p>{comment.body}</p>
+                    <h5>by {comment.author}</h5>
+                </section>
             </li>
         ))}
         </ul>
