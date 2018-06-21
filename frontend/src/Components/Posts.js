@@ -20,13 +20,39 @@ class Posts extends Component {
  }
 
     getPosts = () => {
+        const hardCodedPosts = [
+            {
+                id: 'kb3alekjr234r2',
+                timestamp: 1467166872634,
+                title: `KB Test Post 3`,
+                body: `When I was first asked to make a film about my nephew, Hubert Farnsworth, I thought "Why should I?" Then later, Leela made the film. But if I did make it, you can bet there would have been more topless women on motorcycles. Roll film! You guys aren't Santa! You're not even robots. How dare you lie in front of Jesus? It doesn't look so shiny to me. Tell her you just want to talk. It has nothing to do with mating. This opera's as lousy as it is brilliant! Your lyrics lack subtlety. You can't just have your characters announce how they feel. That makes me feel angry!`,
+                author: 'thingtwo',
+                category: 'react',
+                voteScore: 6,
+                deleted: false,
+                commentCount: 2
+              },
+             {
+                id: 'kb4alkjf29342w',
+                timestamp: 1468479767190,
+                title: `KB Test Post 4`,
+                body: `Just kidding. It takes more than 10 minutes to learn technology.`,
+                author: 'thingone',
+                category: 'redux',
+                voteScore: -5,
+                deleted: false,
+                commentCount: 0
+              }
+            ]
+
         fetch(`${api}/posts`, { headers })
         .then(returnedPromise => returnedPromise.json())
         .then(jsonData => jsonData)
         .then((returnedPosts) => {
-            console.log('Posts from server', returnedPosts)  
+            console.log('Posts from server', returnedPosts) 
+            console.log('Hard Coded Posts', hardCodedPosts)      
             // this.setState(state => state.posts = returnedPosts)
-            this.props.displayPosts(returnedPosts)
+            this.props.displayPosts(hardCodedPosts)
             }
         )    
     }
